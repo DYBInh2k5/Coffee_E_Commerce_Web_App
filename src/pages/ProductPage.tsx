@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../data/products';
+import { Product } from '../types';
 import { useApp } from '../context/AppContext';
 import Reviews from '../components/Reviews';
 import WishlistButton from '../components/WishlistButton';
+import RecentlyViewed, { useRecentlyViewed } from '../components/RecentlyViewed';
 import { ProductDetailSkeleton } from '../components/Skeleton';
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useApp();
+  const { addViewed } = useRecentlyViewed();
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const product = products.find(p => p.id === Number(id));
 
+  // Get recommendations (same category or similar roast, excluding current product)
+  const recommendations: Product[] = product
+    ? products
+        .filter(p => p.id !== product.id)
+        .map(p => ({
+          product: p,
+          score: (p.category === product.category ? 2 : 0) +
+                 (p.roast === product.roast ? 1 : 0) +
+                 p.notes.filter(n => product.notes.includes(n)).length
+        }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map(r => r.product)
+    : [];
+
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 500);
     window.scrollTo(0, 0);
+    if (product) addViewed(product.id);
     return () => clearTimeout(timer);
   }, [id]);
 
@@ -157,6 +176,30 @@ const ProductPage: React.FC = () => {
           <Reviews productId={product.id} />
         </div>
       </div>
+
+      {/* Recommendations */}
+      {recommendations.length > 0 && (
+        <div className="mt-12">
+          <h3 className="font-serif text-xl text-amber-100 mb-4">You Might Also Like</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {recommendations.map((rec) => (
+              <button
+                key={rec.id}
+                onClick={() => navigate(`/product/${rec.id}`)}
+                className="group p-4 bg-stone-800/30 border border-stone-700/30 rounded-xl text-left hover:border-amber-700/50 transition-all"
+              >
+                <img src={rec.image} alt={rec.name} className="w-full aspect-square rounded-lg object-cover mb-3" />
+                <h4 className="text-amber-100 font-medium group-hover:text-amber-300 transition-colors">{rec.name}</h4>
+                <p className="text-stone-400 text-sm mt-1">{rec.origin} • {rec.roast}</p>
+                <p className="text-amber-400 font-bold mt-2">${rec.price.toFixed(2)}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Recently Viewed */}
+      <RecentlyViewed />
     </div>
   );
 };

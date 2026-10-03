@@ -5,6 +5,7 @@ import { useApp } from '../context/AppContext';
 import ProductCard from '../components/ProductCard';
 import Newsletter from '../components/Newsletter';
 import Subscription from '../components/Subscription';
+import CoffeeQuiz from '../components/CoffeeQuiz';
 import { ProductCardSkeleton } from '../components/Skeleton';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +18,8 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('All');
   const [showSubscription, setShowSubscription] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [sortBy, setSortBy] = useState('default');
   const [loading, setLoading] = useState(true);
 
   // Simulate loading
@@ -26,7 +29,7 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    let result = products.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.origin.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -34,7 +37,17 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
       const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, activeCategory]);
+
+    // Sort
+    switch (sortBy) {
+      case 'price-asc': result.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': result.sort((a, b) => b.price - a.price); break;
+      case 'rating': result.sort((a, b) => b.rating - a.rating); break;
+      case 'name': result.sort((a, b) => a.name.localeCompare(b.name)); break;
+    }
+
+    return result;
+  }, [searchQuery, activeCategory, sortBy]);
 
   const handleProductSelect = (product: Product) => {
     navigate(`/product/${product.id}`);
@@ -83,6 +96,12 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
                 Subscribe & Save
               </button>
               <button
+                onClick={() => setShowQuiz(true)}
+                className="px-6 py-3 bg-stone-800 hover:bg-stone-700 text-amber-200 font-medium rounded-xl border border-stone-700 transition-colors"
+              >
+                🎯 Find Your Coffee
+              </button>
+              <button
                 onClick={() => navigate('/brewing')}
                 className="px-6 py-3 bg-stone-800 hover:bg-stone-700 text-amber-200 font-medium rounded-xl border border-stone-700 transition-colors"
               >
@@ -93,7 +112,7 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
         </div>
       </section>
 
-      {/* Category Filters */}
+      {/* Category Filters & Sort */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-2 flex-wrap">
@@ -111,9 +130,22 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
               </button>
             ))}
           </div>
-          <p className="text-stone-500 text-sm">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'coffee' : 'coffees'} found
-          </p>
+          <div className="flex items-center gap-3">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-3 py-2 bg-stone-800 border border-stone-700 rounded-lg text-stone-300 text-sm focus:outline-none focus:border-amber-600 transition-all"
+            >
+              <option value="default">Sort: Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="name">Name A-Z</option>
+            </select>
+            <p className="text-stone-500 text-sm hidden sm:block">
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'coffee' : 'coffees'}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -149,8 +181,9 @@ const HomePage: React.FC<HomePageProps> = ({ searchQuery, onSearchChange }) => {
         </div>
       </section>
 
-      {/* Subscription Modal */}
+      {/* Modals */}
       {showSubscription && <Subscription onClose={() => setShowSubscription(false)} />}
+      {showQuiz && <CoffeeQuiz onClose={() => setShowQuiz(false)} />}
     </div>
   );
 };

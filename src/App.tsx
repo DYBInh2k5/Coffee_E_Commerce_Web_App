@@ -10,6 +10,11 @@ import BrewingPage from './pages/BrewingPage';
 import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import FAQPage from './pages/FAQPage';
+import ContactPage from './pages/ContactPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import LoyaltyPointsPage from './pages/LoyaltyPointsPage';
+import GiftCardsPage from './pages/GiftCardsPage';
 
 const AppContent: React.FC = () => {
   const { cartCount, theme } = useApp();
@@ -65,6 +70,11 @@ const AppContent: React.FC = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/orders" element={<OrderHistoryPage />} />
+          <Route path="/rewards" element={<LoyaltyPointsPage />} />
+          <Route path="/gift-cards" element={<GiftCardsPage />} />
         </Routes>
       </main>
 
@@ -126,8 +136,17 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-stone-500 text-sm">
               <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/brewing')}>Brewing Guides</li>
               <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/about')}>Our Story</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/faq')}>FAQ</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/contact')}>Contact</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-amber-200 font-medium text-sm mb-3">Rewards</h4>
+            <ul className="space-y-2 text-stone-500 text-sm">
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/rewards')}>Loyalty Points</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/gift-cards')}>Gift Cards</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/orders')}>Order History</li>
               <li className="hover:text-amber-400 cursor-pointer transition-colors">Subscription</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Wholesale</li>
             </ul>
           </div>
           <div>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
 import WishlistButton from './WishlistButton';
+import QuickView from './QuickView';
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +11,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
   const { addToCart } = useApp();
+  const [showQuickView, setShowQuickView] = useState(false);
 
   return (
     <div className="group bg-stone-800/50 border border-stone-700/50 rounded-2xl overflow-hidden hover:border-amber-700/50 hover:shadow-xl hover:shadow-amber-900/10 transition-all duration-300">
@@ -27,9 +29,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
             {product.roast} Roast
           </span>
         </div>
-        {/* Wishlist button */}
-        <div className="absolute top-3 right-3">
+        {/* Action buttons */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
           <WishlistButton productId={product.id} className="bg-stone-900/50 backdrop-blur-sm" />
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowQuickView(true);
+            }}
+            className="p-2 bg-stone-900/50 backdrop-blur-sm text-stone-300 hover:text-amber-300 rounded-full transition-colors"
+            title="Quick View"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
         </div>
         <div className="absolute bottom-3 left-3 right-3">
           <div className="flex items-center gap-1">
@@ -79,6 +94,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
           Add to Cart
         </button>
       </div>
+
+      {/* Quick View Modal */}
+      {showQuickView && (
+        <QuickView product={product} onClose={() => setShowQuickView(false)} />
+      )}
     </div>
   );
 };
