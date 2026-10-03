@@ -11,7 +11,7 @@ export const products: Product[] = [
     roast: 'Light',
     description: 'A bright and complex coffee from the birthplace of coffee. Grown at high elevations in the Yirgacheffe region, this lot delivers an extraordinary cup with floral aromatics and a silky body.',
     notes: ['Blueberry', 'Jasmine', 'Bergamot', 'Honey'],
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/f13deee6-635a-483b-9e9e-8add6871e406/_result.png',
     rating: 4.9,
   },
   {
@@ -24,7 +24,7 @@ export const products: Product[] = [
     roast: 'Medium',
     description: 'A classic Colombian coffee with exceptional balance. Grown in the Huila region by smallholder farmers, this coffee offers a smooth, well-rounded cup perfect for any time of day.',
     notes: ['Caramel', 'Red Apple', 'Milk Chocolate', 'Walnut'],
-    image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/5ba546d7-e434-4805-9e03-5ef927ea680d/_result.png',
     rating: 4.7,
   },
   {
@@ -37,7 +37,7 @@ export const products: Product[] = [
     roast: 'Dark',
     description: 'Our signature dark roast blend combines the chocolatey depth of Brazilian beans with the smoky richness of Guatemalan Antigua. Bold, full-bodied, and perfect for espresso.',
     notes: ['Dark Chocolate', 'Smoky', 'Brown Sugar', 'Roasted Almond'],
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/e5ee0544-6c1e-48aa-97ee-e46c5c9bd5e3/_result.png',
     rating: 4.6,
   },
   {
@@ -50,7 +50,7 @@ export const products: Product[] = [
     roast: 'Medium-Light',
     description: 'A rare peaberry selection from Kenya\'s central highlands. Each bean is a single round seed rather than the typical pair, concentrating flavor into an intensely vibrant cup.',
     notes: ['Blackcurrant', 'Grapefruit', 'Tomato', 'Brown Sugar'],
-    image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/472ab66e-eb40-42a4-a8d5-7ced77d1c9d2/_result.png',
     rating: 4.8,
   },
   {
@@ -63,7 +63,7 @@ export const products: Product[] = [
     roast: 'Medium',
     description: 'Designed to be your perfect morning companion. This blend marries Ethiopian brightness with Costa Rican sweetness for a clean, uplifting cup that starts your day right.',
     notes: ['Peach', 'Vanilla', 'Toasted Almond', 'Citrus Zest'],
-    image: 'https://images.unsplash.com/photo-1498804103079-a6351b050096?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/fa191554-f46c-4070-8664-e009175dcccb/_result.png',
     rating: 4.5,
   },
   {
@@ -76,7 +76,7 @@ export const products: Product[] = [
     roast: 'Dark',
     description: 'A full-bodied, earthy coffee from the lush forests of northern Sumatra. Wet-hulled processing gives this coffee its signature deep, complex character with minimal acidity.',
     notes: ['Cedar', 'Dark Cocoa', 'Tobacco', 'Earthy'],
-    image: 'https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=600&h=600&fit=crop',
+    image: 'https://image.qwenlm.ai/generated-images/d0583f28-ab6c-4fc7-aed9-51c6cc4dcb49/_result.png',
     rating: 4.7,
   },
 ];

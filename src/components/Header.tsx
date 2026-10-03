@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useApp } from '../context/AppContext';
 
 interface HeaderProps {
   cartCount: number;
@@ -9,6 +11,9 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ cartCount, onCartClick, onLogoClick, searchQuery, onSearchChange }) => {
+  const { wishlist } = useApp();
+  const navigate = useNavigate();
+
   return (
     <header className="sticky top-0 z-50 bg-stone-900/95 backdrop-blur-sm border-b border-amber-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,20 +47,50 @@ const Header: React.FC<HeaderProps> = ({ cartCount, onCartClick, onLogoClick, se
             </div>
           </div>
 
-          {/* Cart Button */}
-          <button
-            onClick={onCartClick}
-            className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-amber-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                {cartCount}
-              </span>
-            )}
-          </button>
+          {/* Actions */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* User */}
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
+              title="Tài khoản"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </button>
+            {/* Wishlist */}
+            <button
+              onClick={() => navigate('/wishlist')}
+              className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
+              title="Wishlist"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              {wishlist.length > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-red-600 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {wishlist.length}
+                </span>
+              )}
+            </button>
+
+            {/* Cart */}
+            <button
+              onClick={onCartClick}
+              className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
+              title="Cart"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              {cartCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-amber-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Search - Mobile */}
