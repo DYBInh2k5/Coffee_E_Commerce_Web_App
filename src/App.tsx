@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Header from './components/Header';
 import ToastContainer from './components/Toast';
 import ThemeToggle from './components/ThemeToggle';
@@ -15,6 +16,11 @@ import ContactPage from './pages/ContactPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import LoyaltyPointsPage from './pages/LoyaltyPointsPage';
 import GiftCardsPage from './pages/GiftCardsPage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import AddressesPage from './pages/AddressesPage';
+import WishlistPage from './pages/WishlistPage';
+import SettingsPage from './pages/SettingsPage';
 
 const AppContent: React.FC = () => {
   const { cartCount, theme } = useApp();
@@ -75,6 +81,11 @@ const AppContent: React.FC = () => {
           <Route path="/orders" element={<OrderHistoryPage />} />
           <Route path="/rewards" element={<LoyaltyPointsPage />} />
           <Route path="/gift-cards" element={<GiftCardsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/addresses" element={<AddressesPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </main>
 
@@ -171,11 +182,13 @@ const Footer: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </AppProvider>
+    </AuthProvider>
   );
 };
 

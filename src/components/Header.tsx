@@ -49,9 +49,19 @@ const Header: React.FC<HeaderProps> = ({ cartCount, onCartClick, onLogoClick, se
 
           {/* Actions */}
           <div className="flex items-center gap-1 sm:gap-2">
+            {/* User */}
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
+              title="Tài khoản"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </button>
             {/* Wishlist */}
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/wishlist')}
               className="relative p-2 sm:p-3 text-amber-100 hover:text-amber-300 hover:bg-stone-800 rounded-full transition-all"
               title="Wishlist"
             >
