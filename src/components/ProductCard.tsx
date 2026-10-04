@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
+import { useCurrency } from '../context/CurrencyContext';
 import WishlistButton from './WishlistButton';
 import QuickView from './QuickView';
 
@@ -11,6 +12,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
   const { addToCart } = useApp();
+  const { formatPrice } = useCurrency();
   const [showQuickView, setShowQuickView] = useState(false);
 
   return (
@@ -64,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
             {product.name}
           </h3>
           <span className="text-amber-400 font-bold text-lg whitespace-nowrap">
-            ${product.price.toFixed(2)}
+            {formatPrice(product.price)}
           </span>
         </div>
 
