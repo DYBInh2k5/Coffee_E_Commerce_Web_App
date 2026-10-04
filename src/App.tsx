@@ -24,6 +24,13 @@ import SettingsPage from './pages/SettingsPage';
 import ReferralProgramPage from './pages/ReferralProgramPage';
 import TastingJournalPage from './pages/TastingJournalPage';
 import CoffeeClubPage from './pages/CoffeeClubPage';
+import OrderTrackingPage from './pages/OrderTrackingPage';
+import ReturnRefundPage from './pages/ReturnRefundPage';
+import InvoicePage from './pages/InvoicePage';
+import WholesalePortalPage from './pages/WholesalePortalPage';
+import AnalyticsDashboardPage from './pages/AnalyticsDashboardPage';
+import EmailTemplatesPage from './pages/EmailTemplatesPage';
+import SupportTicketsPage from './pages/SupportTicketsPage';
 import LiveChat from './components/LiveChat';
 import AbandonedCartReminder from './components/AbandonedCartReminder';
 
@@ -94,6 +101,13 @@ const AppContent: React.FC = () => {
           <Route path="/referral" element={<ReferralProgramPage />} />
           <Route path="/journal" element={<TastingJournalPage />} />
           <Route path="/club" element={<CoffeeClubPage />} />
+          <Route path="/tracking" element={<OrderTrackingPage />} />
+          <Route path="/returns" element={<ReturnRefundPage />} />
+          <Route path="/invoice" element={<InvoicePage />} />
+          <Route path="/wholesale" element={<WholesalePortalPage />} />
+          <Route path="/analytics" element={<AnalyticsDashboardPage />} />
+          <Route path="/emails" element={<EmailTemplatesPage />} />
+          <Route path="/tickets" element={<SupportTicketsPage />} />
         </Routes>
       </main>
 
@@ -166,12 +180,12 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-amber-200 font-medium text-sm mb-3">Rewards</h4>
+            <h4 className="text-amber-200 font-medium text-sm mb-3">Services</h4>
             <ul className="space-y-2 text-stone-500 text-sm">
-              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/rewards')}>Loyalty Points</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/gift-cards')}>Gift Cards</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/orders')}>Order History</li>
-              <li className="hover:text-amber-400 cursor-pointer transition-colors">Subscription</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/wholesale')}>Wholesale</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/referral')}>Referral Program</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/club')}>Coffee Club</li>
+              <li className="hover:text-amber-400 cursor-pointer transition-colors" onClick={() => navigate('/returns')}>Returns</li>
             </ul>
           </div>
           <div>
