@@ -25,6 +25,9 @@ const DashboardPage: React.FC = () => {
     { label: 'Địa chỉ giao hàng', icon: '📍', path: '/addresses', desc: 'Quản lý địa chỉ' },
     { label: 'Điểm thưởng', icon: '⭐', path: '/rewards', desc: 'Xem điểm và đổi quà' },
     { label: 'Danh sách yêu thích', icon: '❤️', path: '/wishlist', desc: 'Sản phẩm đã lưu' },
+    { label: 'Nhật ký nếm thử', icon: '📝', path: '/journal', desc: 'Ghi chú cà phê' },
+    { label: 'Giới thiệu bạn bè', icon: '🎯', path: '/referral', desc: 'Nhận điểm thưởng' },
+    { label: 'Coffee Club', icon: '☕', path: '/club', desc: 'Sự kiện & cộng đồng' },
     { label: 'Thẻ quà tặng', icon: '🎁', path: '/gift-cards', desc: 'Mua và quản lý' },
     { label: 'Cài đặt tài khoản', icon: '⚙️', path: '/settings', desc: 'Cập nhật thông tin' },
   ];

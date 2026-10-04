@@ -21,6 +21,11 @@ import DashboardPage from './pages/DashboardPage';
 import AddressesPage from './pages/AddressesPage';
 import WishlistPage from './pages/WishlistPage';
 import SettingsPage from './pages/SettingsPage';
+import ReferralProgramPage from './pages/ReferralProgramPage';
+import TastingJournalPage from './pages/TastingJournalPage';
+import CoffeeClubPage from './pages/CoffeeClubPage';
+import LiveChat from './components/LiveChat';
+import AbandonedCartReminder from './components/AbandonedCartReminder';
 
 const AppContent: React.FC = () => {
   const { cartCount, theme } = useApp();
@@ -86,6 +91,9 @@ const AppContent: React.FC = () => {
           <Route path="/addresses" element={<AddressesPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/referral" element={<ReferralProgramPage />} />
+          <Route path="/journal" element={<TastingJournalPage />} />
+          <Route path="/club" element={<CoffeeClubPage />} />
         </Routes>
       </main>
 
@@ -94,6 +102,12 @@ const AppContent: React.FC = () => {
 
       {/* Toast Notifications */}
       <ToastContainer />
+
+      {/* Live Chat Widget */}
+      <LiveChat />
+
+      {/* Abandoned Cart Reminder */}
+      <AbandonedCartReminder />
     </div>
   );
 };
