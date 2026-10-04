@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { CurrencyProvider } from './context/CurrencyContext';
+import './i18n/config';
 import Header from './components/Header';
 import ToastContainer from './components/Toast';
 import ThemeToggle from './components/ThemeToggle';
+import ErrorBoundary from './components/ErrorBoundary';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import CurrencySwitcher from './components/CurrencySwitcher';
+import SEO from './components/SEO';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import BrewingPage from './pages/BrewingPage';
@@ -73,6 +79,8 @@ const AppContent: React.FC = () => {
               <NavLink to="/brewing" label="Brewing Guides" />
               <NavLink to="/about" label="Our Story" />
               <div className="ml-auto flex items-center gap-2">
+                <LanguageSwitcher />
+                <CurrencySwitcher />
                 <ThemeToggle />
               </div>
             </div>
@@ -210,13 +218,18 @@ const Footer: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <AppProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </AppProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <AppProvider>
+          <CurrencyProvider>
+            <BrowserRouter>
+              <SEO />
+              <AppContent />
+            </BrowserRouter>
+          </CurrencyProvider>
+        </AppProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 };
 
